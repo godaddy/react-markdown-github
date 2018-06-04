@@ -1,0 +1,66 @@
+{
+  "name": "react-markdown-github",
+  "description": "React component that renders Markdown similarly to Github's formatting",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "browser": "lib/index.js",
+  "module": "src/index.js",
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ],
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint-godaddy-react src/*.js test/*.js",
+    "prepublishOnly": "mkdir -p lib && babel -o lib/index.js src/index.js",
+    "pretest": "npm run lint",
+    "test": "nyc --reporter=text --reporter=json-summary npm run test:mocha",
+    "test:mocha": "mocha --require test/setup ./test/*.test.js"
+  },
+  "repository": "godaddy/react-markdown-github",
+  "keywords": [
+    "markdown",
+    "react"
+  ],
+  "author": "GoDaddy.com Operating Company, LLC",
+  "contributors": [
+    "Jason Cline <jcline@godaddy.com>"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.3.2"
+  },
+  "devDependencies": {
+    "assume": "^2.0.1",
+    "assume-enzyme": "0.0.1",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.23.x",
+    "babel-register": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-godaddy-react": "^2.2.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-mocha": "^5.0.0",
+    "eslint-plugin-react": "^7.7.0",
+    "jsdom": "^9.12.0",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-test-renderer": "^16.3.2"
+  },
+  "dependencies": {
+    "react-markdown": "^3.3.0",
+    "slugify": "^1.2.9",
+    "url-parse": "^1.4.0"
+  }
+}
