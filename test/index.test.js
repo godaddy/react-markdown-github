@@ -119,6 +119,16 @@ Repeat Header`;
       assume(tree.find('#super-long-header').find('a').prop('href')).is.equal('#super-long-header');
       assume(tree.find('#blort')).to.have.length(0);
     });
+
+    it('A header with non text elements', () => {
+      const input = '### `codething` in the header `moreCode` txt';
+
+      renderFullDom({ source: input });
+
+      assume(tree.find('#codething-in-the-header-morecode-txt')).to.have.length(1);
+      assume(tree.find('#codething-in-the-header-morecode-txt')
+        .find('a').prop('href')).is.equal('#codething-in-the-header-morecode-txt');
+    });
   });
 
   describe('href customization', () => {
