@@ -28,7 +28,6 @@ export default class ReactMarkdownGithub extends Component {
 
   /**
    * Parses url into usable github components.
-   *
    * @param {String} url - a valid github url.
    * @returns {Object} {github, org, repo, filename}
    * @api private
@@ -50,7 +49,6 @@ export default class ReactMarkdownGithub extends Component {
   /**
   * React lifecyle method to ensure that the github url prop is parsed each time
   * it is updated.
-  *
   * @param {Object} nextProps - new component props
   * @param {Object} prevState - prior component state
   * @returns {Object} returns new state or null if not modified.
@@ -121,7 +119,17 @@ export default class ReactMarkdownGithub extends Component {
   * @api private
   */
   renderHeading(props) {
-    const [title] = props.children;
+
+    let title = '';
+
+    props.children.forEach((child) => {
+      if (child.props && child.props.children) {
+        title += child.props.children + ' ';
+      } else {
+        title += child;
+      }
+    });
+
     const slug = slugify(title, { lower: true });
     let uniqueSlug = slug;
 
