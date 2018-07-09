@@ -81,7 +81,8 @@ describe('ReactMarkdownGithub', function () {
       assume(result.github).is.equal('http://github.com/');
       assume(result.org).is.equal('godaddy');
       assume(result.repo).is.equal('react-markdown-github');
-      assume(result.filename).is.equal('/README.md');
+      assume(result.filename).is.equal('README.md');
+      assume(result.filepath).is.equal('/README.md');
     });
 
     it('should handle URLs with hash', () => {
@@ -91,8 +92,8 @@ describe('ReactMarkdownGithub', function () {
       assume(result).is.an('object');
       assume(result.github).is.equal('http://github.com/');
       assume(result.org).is.equal('godaddy');
-      assume(result.repo).is.equal('react-markdown-github');
-      assume(result.filename).is.equal('/README.md');
+      assume(result.filename).is.equal('README.md');
+      assume(result.filepath).is.equal('/README.md');
     });
   });
 

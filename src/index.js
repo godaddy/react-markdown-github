@@ -37,10 +37,12 @@ export default class ReactMarkdownGithub extends Component {
     const { origin, pathname } = new URL(url);
     const parts = pathname.split('/');
     const [, org, repo] = parts;
-    const filename = `/${parts.slice(5).join('/')}`;
+    const filepath = `/${parts.slice(5).join('/')}`;
+    const filename = parts[parts.length - 1];
 
     return {
       github: `${origin}/`,
+      filepath,
       filename,
       org,
       repo
@@ -83,9 +85,7 @@ export default class ReactMarkdownGithub extends Component {
       return url;
     }
 
-    // TODO: Remove this and set this value in normalizeGithubUrl
-    const realFile = this.state.filename.replace(/^\//, '');
-    const withinFile = new RegExp(`\.?\/?${realFile}#(.*)$`, 'i');
+    const withinFile = new RegExp(`.?/?${this.state.filename}#(.*)$`, 'i');
     const parsed = new URL(url, this.props.sourceUrl);
     const isWithinFile = withinFile.test(url);
 
@@ -135,7 +135,6 @@ export default class ReactMarkdownGithub extends Component {
   * @api private
   */
   renderHeading(props) {
-
     let title = '';
 
     props.children.forEach((child) => {
@@ -184,7 +183,7 @@ export default class ReactMarkdownGithub extends Component {
         className={ className }
         resolver={ resolver }
         transformLinkUri={ this.transformLinkUri }
-        transformImageUri={ this.transformImageUri  } />
+        transformImageUri={ this.transformImageUri } />
     );
   }
 }
