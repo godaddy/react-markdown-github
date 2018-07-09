@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+### 2.0.0
+
 - [#2] **BREAKING** Handle hash URLs, provide both `{ filename, filepath }`.
    - `filename` is now `filepath` in `resolver` 
 - [#3] **BREAKING** Use `*Uri` and `uri` consistently to match the props
