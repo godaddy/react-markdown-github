@@ -168,7 +168,7 @@ Repeat Header`;
       assume(tree.find('a').prop('href')).is.equal(href);
     }
 
-    it.only('does not transform anchors links (simple anchor)', () => {
+    it('does not transform anchors links (simple anchor)', () => {
       const input = `
 ## Table of Contents
 
@@ -186,10 +186,10 @@ Repeat Header`;
 
       const anchors = tree.find('a');
       assume(anchors).to.have.length(5);
-      assume(anchors.at(1).prop('href')).is.equal('#hey-that-is-cool')
-      assume(anchors.at(2).prop('href')).is.equal('#nested-anchor')
-      assume(anchors.at(3).prop('href')).is.equal('#anchor-reference')
-      assume(anchors.at(4).prop('href')).is.equal('#nested-three-space-anchor')
+      assume(anchors.at(1).prop('href')).is.equal('#hey-that-is-cool');
+      assume(anchors.at(2).prop('href')).is.equal('#nested-anchor');
+      assume(anchors.at(3).prop('href')).is.equal('#anchor-reference');
+      assume(anchors.at(4).prop('href')).is.equal('#nested-three-space-anchor');
     });
 
     it('does not transform absolute links', () => {

@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import slugify from 'slugify';
 import URL from 'url-parse';
 
+const isHash = /^#/;
 
 /**
  * A react component that wraps [react-markdown](react-markdown) that:
@@ -74,6 +75,14 @@ export default class ReactMarkdownGithub extends Component {
   * @api private
   */
   normalizeLinkUri(url) {
+    // Do not attempt to parse "pure" hashes since they
+    // are not fully qualified URLs by definition. This will
+    // not work for querystring plus hash, but Github does not
+    // support querystring so this is by design.
+    if (isHash.test(url)) {
+      return url;
+    }
+
     var parsed = new URL(url, this.props.sourceUrl);
     return parsed.href;
   }
