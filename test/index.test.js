@@ -168,6 +168,30 @@ Repeat Header`;
       assume(tree.find('a').prop('href')).is.equal(href);
     }
 
+    it.only('does not transform anchors links (simple anchor)', () => {
+      const input = `
+## Table of Contents
+
+- [Hey that is cool](#hey-that-is-cool)
+  - [Nested anchor](#nested-anchor)
+- [Anchor reference][anchor-ref]
+   - [Nested three-space anchor](#nested-three-space-anchor)
+
+[anchor-ref]: #anchor-reference
+`;
+
+      renderFullDom({ source: input });
+
+      assume(tree.find('#table-of-contents')).to.have.length(1);
+
+      const anchors = tree.find('a');
+      assume(anchors).to.have.length(5);
+      assume(anchors.at(1).prop('href')).is.equal('#hey-that-is-cool')
+      assume(anchors.at(2).prop('href')).is.equal('#nested-anchor')
+      assume(anchors.at(3).prop('href')).is.equal('#anchor-reference')
+      assume(anchors.at(4).prop('href')).is.equal('#nested-three-space-anchor')
+    });
+
     it('does not transform absolute links', () => {
       const input = `[I'm an inline-style link](https://www.google.com)`;
       renderDomWithResolver(input);
