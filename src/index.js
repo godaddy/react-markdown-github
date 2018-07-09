@@ -83,8 +83,15 @@ export default class ReactMarkdownGithub extends Component {
       return url;
     }
 
-    var parsed = new URL(url, this.props.sourceUrl);
-    return parsed.href;
+    // TODO: Remove this and set this value in normalizeGithubUrl
+    const realFile = this.state.filename.replace(/^\//, '');
+    const withinFile = new RegExp(`\.?\/?${realFile}#(.*)$`, 'i');
+    const parsed = new URL(url, this.props.sourceUrl);
+    const isWithinFile = withinFile.test(url);
+
+    return isWithinFile
+      ? parsed.hash
+      : parsed.href;
   }
 
   /**

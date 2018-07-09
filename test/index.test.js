@@ -11,8 +11,9 @@ describe('ReactMarkdownGithub', function () {
   let tree;
 
   afterEach(() => {
-    if (tree && typeof tree.unmount === 'function')
+    if (tree && typeof tree.unmount === 'function') {
       tree.unmount();
+    }
   });
 
   // Renders the ReactMarkdownGithub with the props supplied
@@ -68,6 +69,30 @@ describe('ReactMarkdownGithub', function () {
       });
       assume(tree.find('img')).to.have.length(1);
       assume(tree.find('img').prop('src')).is.equal('foo.png');
+    });
+  });
+
+  describe('.normalizeGithubUrl', () => {
+    it('should handle URLs without hash', () => {
+      const uri = 'http://github.com/godaddy/react-markdown-github/blob/master/README.md';
+      const result = ReactMarkdownGithub.normalizeGithubUrl(uri);
+
+      assume(result).is.an('object');
+      assume(result.github).is.equal('http://github.com/');
+      assume(result.org).is.equal('godaddy');
+      assume(result.repo).is.equal('react-markdown-github');
+      assume(result.filename).is.equal('/README.md');
+    });
+
+    it('should handle URLs with hash', () => {
+      const uri = 'http://github.com/godaddy/react-markdown-github/blob/master/README.md#full-url-reference';
+      const result = ReactMarkdownGithub.normalizeGithubUrl(uri);
+
+      assume(result).is.an('object');
+      assume(result.github).is.equal('http://github.com/');
+      assume(result.org).is.equal('godaddy');
+      assume(result.repo).is.equal('react-markdown-github');
+      assume(result.filename).is.equal('/README.md');
     });
   });
 
@@ -163,12 +188,12 @@ Repeat Header`;
      * Assumes that the current tree has exactly one anchor tag
      * with the given `href`.
      */
-    function assumeSingeHrefEquals(href) {
+    function assumeSingleHrefEquals(href) {
       assume(tree.find('a')).to.have.length(1);
       assume(tree.find('a').prop('href')).is.equal(href);
     }
 
-    it('does not transform anchors links (simple anchor)', () => {
+    it('does not transform pure anchors links', () => {
       const input = `
 ## Table of Contents
 
@@ -180,7 +205,10 @@ Repeat Header`;
 [anchor-ref]: #anchor-reference
 `;
 
-      renderFullDom({ source: input });
+      renderFullDom({
+        source: input,
+        sourceUrl: 'http://github.com/godaddy/react-markdown-github/README.md'
+      });
 
       assume(tree.find('#table-of-contents')).to.have.length(1);
 
@@ -192,34 +220,63 @@ Repeat Header`;
       assume(anchors.at(4).prop('href')).is.equal('#nested-three-space-anchor');
     });
 
+    it('strips filename from anchor links on the same page', () => {
+      const input = `
+## Table of Contents
+
+- [Hey that is cool](README.md#hey-that-is-cool)
+  - [Nested anchor](readme.md#nested-anchor)
+- [Anchor reference][anchor-ref]
+   - [Nested three-space anchor](./README.md#nested-three-space-anchor)
+- [Full URL reference](http://github.com/godaddy/react-markdown-github/blob/master/README.md#full-url-reference)
+
+[anchor-ref]: /readme.md#anchor-reference
+`;
+
+      renderFullDom({
+        source: input,
+        sourceUrl: 'http://github.com/godaddy/react-markdown-github/blob/master/README.md'
+      });
+
+      assume(tree.find('#table-of-contents')).to.have.length(1);
+
+      const anchors = tree.find('a');
+      assume(anchors).to.have.length(6);
+      assume(anchors.at(1).prop('href')).is.equal('#hey-that-is-cool');
+      assume(anchors.at(2).prop('href')).is.equal('#nested-anchor');
+      assume(anchors.at(3).prop('href')).is.equal('#anchor-reference');
+      assume(anchors.at(4).prop('href')).is.equal('#nested-three-space-anchor');
+      assume(anchors.at(5).prop('href')).is.equal('#full-url-reference');
+    });
+
     it('does not transform absolute links', () => {
       const input = `[I'm an inline-style link](https://www.google.com)`;
       renderDomWithResolver(input);
-      assumeSingeHrefEquals('https://www.google.com');
+      assumeSingleHrefEquals('https://www.google.com');
     });
 
     it('transform realitive links', () => {
       const input = `[I'm a relative reference to a repository file](./FOO.md)`;
       renderDomWithResolver(input);
-      assumeSingeHrefEquals('https://github.mycorp.com/org/component/blob/master/FOO.md');
+      assumeSingleHrefEquals('https://github.mycorp.com/org/component/blob/master/FOO.md');
     });
 
     it('transform realitive links with anchors', () => {
       const input = `[I'm a relative reference to a repository file](./FOO.md#Overview)`;
       renderDomWithResolver(input);
-      assumeSingeHrefEquals('https://github.mycorp.com/org/component/blob/master/FOO.md#Overview');
+      assumeSingleHrefEquals('https://github.mycorp.com/org/component/blob/master/FOO.md#Overview');
     });
 
     it('transform deep path urls', () => {
       const input = `[I'm a relative reference to a repository file](lib/test/BAR.md)`;
       renderDomWithResolver(input);
-      assumeSingeHrefEquals('https://github.mycorp.com/org/component/blob/master/lib/test/BAR.md');
+      assumeSingleHrefEquals('https://github.mycorp.com/org/component/blob/master/lib/test/BAR.md');
     });
 
     it('custom resolver changes matched url', () => {
       const input = `[I'm a relative reference to a repository file](lib/test/FOO.md)`;
       renderDomWithResolver(input);
-      assumeSingeHrefEquals('http://contentsite.com/foo.html');
+      assumeSingleHrefEquals('http://contentsite.com/foo.html');
     });
   });
 });
