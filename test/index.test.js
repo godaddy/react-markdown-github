@@ -95,6 +95,18 @@ describe('ReactMarkdownGithub', function () {
       assume(result.filename).is.equal('README.md');
       assume(result.filepath).is.equal('/README.md');
     });
+
+    it('should provide distinct { filename, filepath }', () => {
+      const uri = 'http://github.com/godaddy/react-markdown-github/blob/master/nested/dir/README.md';
+      const result = ReactMarkdownGithub.normalizeGithubUrl(uri);
+
+      assume(result).is.an('object');
+      assume(result.github).is.equal('http://github.com/');
+      assume(result.org).is.equal('godaddy');
+      assume(result.filename).is.equal('README.md');
+      assume(result.filepath).is.equal('/nested/dir/README.md');
+    });
+
   });
 
   describe('renderers', function () {
