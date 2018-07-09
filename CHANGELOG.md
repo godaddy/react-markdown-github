@@ -1,5 +1,13 @@
 # `react-markdown-github`
 
+- [#2] **BREAKING** Handle hash URLs, provide both `{ filename, filepath }`.
+   - `filename` is now `filepath` in `resolver` 
+- [#3] **BREAKING** Use `*Uri` and `uri` consistently to match the props
+  exposed by `react-markdown`.
+   - `sourceUrl` is now `sourceUri`.
+   - `transformImageUri` now accepts `({ uri, github, org, repo, filename })`
+   - `resolver` now accepts `({ uri, github, org, repo, filename, filepath })`
+
 ### 1.0.1
 
 - [#1] Better support for non-text children to header nodes.

@@ -35,25 +35,23 @@ describe('ReactMarkdownGithub', function () {
   describe('images', function () {
     it('default handler does not modify image url', () => {
       const input = 'Some markdown  ![alt text](https://someplace/bar.png "Logo Title Text 1")  with a random image in it.';
-      renderFullDom({
-        source: input
-      });
+      renderFullDom({ source: input });
       assume(tree.find('img')).to.have.length(1);
       assume(tree.find('img').prop('src')).is.equal('https://someplace/bar.png');
     });
     it('proxy url rewrites realitive urls', () => {
       const input = 'Some markdown  ![alt text](resources/bar.png "Logo Title Text 1")  with a random image in it.';
-      const resolver = ({ url, github, org, repo, filename }) => {
-        assume(url).to.exist();
+      const resolver = ({ uri, github, org, repo, filename }) => {
+        assume(uri).to.exist();
         assume(github).equals('https://github.mycorp.com/');
         assume(org).equals('org');
         assume(repo).equals('component');
         assume(filename).to.exist();
-        return `https://git-proxy.mycorp.com/${org}/${repo}/${url}`;
+        return `https://git-proxy.mycorp.com/${org}/${repo}/${uri}`;
       };
       renderFullDom({
         source: input,
-        sourceUrl: 'https://github.mycorp.com/org/component/blob/master/README.md',
+        sourceUri: 'https://github.mycorp.com/org/component/blob/master/README.md',
         transformImageUri: resolver
       });
 
@@ -176,23 +174,23 @@ Repeat Header`;
 
     /*
      * Renders the target `input` with a few common properties
-     * { className, sourceUrl, resolver } for consistency in tests.
+     * { className, sourceUri, resolver } for consistency in tests.
      */
     function renderDomWithResolver(input) {
       renderFullDom({
         source: input,
         className: 'neatClass',
-        sourceUrl: 'https://github.mycorp.com/org/component/blob/master/README.md',
-        resolver: ({ url, github, org, repo, filename }) => {
+        sourceUri: 'https://github.mycorp.com/org/component/blob/master/README.md',
+        resolver: ({ uri, github, org, repo, filename }) => {
           // Validate all resolver params
-          assume(url).to.exist();
+          assume(uri).to.exist();
           assume(github).equals('https://github.mycorp.com/');
           assume(org).equals('org');
           assume(repo).equals('component');
           assume(filename).to.exist();
 
-          url = urlMap[url] || url;
-          return  url;
+          uri = urlMap[uri] || uri;
+          return uri;
         }
       });
     }
@@ -220,7 +218,7 @@ Repeat Header`;
 
       renderFullDom({
         source: input,
-        sourceUrl: 'http://github.com/godaddy/react-markdown-github/README.md'
+        sourceUri: 'http://github.com/godaddy/react-markdown-github/README.md'
       });
 
       assume(tree.find('#table-of-contents')).to.have.length(1);
@@ -248,7 +246,7 @@ Repeat Header`;
 
       renderFullDom({
         source: input,
-        sourceUrl: 'http://github.com/godaddy/react-markdown-github/blob/master/README.md'
+        sourceUri: 'http://github.com/godaddy/react-markdown-github/blob/master/README.md'
       });
 
       assume(tree.find('#table-of-contents')).to.have.length(1);

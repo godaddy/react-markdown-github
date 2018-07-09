@@ -9,7 +9,7 @@ const isHash = /^#/;
 /**
  * A react component that wraps [react-markdown](react-markdown) that:
  * -  links all headers with an anchor link.
- * -  resolves all relative links to absolute Github URLs based on the sourceUrl of the document.
+ * -  resolves all relative links to absolute Github URLs based on the sourceUri of the document.
  *      e.g. /foo/bar.md becomes https://github.mycorp.com/org/component/blob/master/foo/bar.md
  * -  allows the parent component to override the resolved url
  *
@@ -29,12 +29,12 @@ export default class ReactMarkdownGithub extends Component {
 
   /**
    * Parses url into usable github components.
-   * @param {String} url - a valid github url.
-   * @returns {Object} {github, org, repo, filename}
+   * @param {String} uri - a valid Github url.
+   * @returns {Object} { github, org, repo, filename, filepath }
    * @api private
    */
-  static normalizeGithubUrl(url) {
-    const { origin, pathname } = new URL(url);
+  static normalizeGithubUrl(uri) {
+    const { origin, pathname } = new URL(uri);
     const parts = pathname.split('/');
     const [, org, repo] = parts;
     const filepath = `/${parts.slice(5).join('/')}`;
@@ -57,11 +57,11 @@ export default class ReactMarkdownGithub extends Component {
   * @returns {Object} returns new state or null if not modified.
   * @api private
   */
-  static getDerivedStateFromProps({ sourceUrl }, prevState) {
-    if (sourceUrl !== prevState.sourceUrl) {
+  static getDerivedStateFromProps({ sourceUri }, prevState) {
+    if (sourceUri !== prevState.sourceUri) {
       return {
-        sourceUrl: sourceUrl,
-        ...ReactMarkdownGithub.normalizeGithubUrl(sourceUrl)
+        sourceUri: sourceUri,
+        ...ReactMarkdownGithub.normalizeGithubUrl(sourceUri)
       };
     }
     return null;
@@ -70,24 +70,24 @@ export default class ReactMarkdownGithub extends Component {
   /**
   * Converts the passed url until an absolute url. If the passed URL is absolute
   * it will be returned unmodified. If the URL is realitive then it will be
-  * merged with the current `sourceUrl` property.
+  * merged with the current `sourceUri` property.
   *
-  * @param {String} url - url that can be either absolute or realitive.
-  * @returns {url} - will return a absolute url.
+  * @param {String} uri - absolute or realitive URL.
+  * @returns {url} - will return a absolute URL.
   * @api private
   */
-  normalizeLinkUri(url) {
+  normalizeLinkUri(uri) {
     // Do not attempt to parse "pure" hashes since they
     // are not fully qualified URLs by definition. This will
     // not work for querystring plus hash, but Github does not
     // support querystring so this is by design.
-    if (isHash.test(url)) {
-      return url;
+    if (isHash.test(uri)) {
+      return uri;
     }
 
     const withinFile = new RegExp(`.?/?${this.state.filename}#(.*)$`, 'i');
-    const parsed = new URL(url, this.props.sourceUrl);
-    const isWithinFile = withinFile.test(url);
+    const parsed = new URL(uri, this.props.sourceUri);
+    const isWithinFile = withinFile.test(uri);
 
     return isWithinFile
       ? parsed.hash
@@ -97,30 +97,30 @@ export default class ReactMarkdownGithub extends Component {
   /**
   * The callback handler from `ReactMarkdown` .
   *
-  * @param {String} url - url
+  * @param {String} uri - Markdown link URL.
   * @param {Object} children - Child Elements of the link.
   * @param {String} title - link title.
-  * @returns {url} - will return a absolute url.
+  * @returns {url} - will return a absolute URL.
   * @api private
   */
-  transformLinkUri(url, children, title) {
+  transformLinkUri(uri, children, title) {
     const { resolver } = this.props;
-    const normalized = this.normalizeLinkUri(url);
-    const opts = { ...this.state, url: normalized, children, title };
+    const normalized = this.normalizeLinkUri(uri);
+    const opts = { ...this.state, uri: normalized, children, title };
     return resolver && resolver(opts) || normalized;
   }
 
   /**
   * The callback handler from `ReactMarkdown` .
   *
-  * @param {String} url - url
-  * @returns {url} - will return a absolute url.
+  * @param {String} uri - Markdown image URL.
+  * @returns {url} - will return a absolute URL.
   * @api private
   */
-  transformImageUri(url) {
+  transformImageUri(uri) {
     const { transformImageUri } = this.props;
-    const opts = { ...this.state, url: url };
-    return transformImageUri && transformImageUri(opts) || url;
+    const opts = { ...this.state, uri };
+    return transformImageUri && transformImageUri(opts) || uri;
   }
 
   /**
@@ -192,17 +192,17 @@ export default class ReactMarkdownGithub extends Component {
 ReactMarkdownGithub.propTypes = {
   /** {source} The Markdown content to be rendered by `ReactMarkdown` */
   source: PropTypes.string,
-  /** {sourceUrl} The absolute url to the github repo. All realitive urls will
-   * be assumed to be realitve to this file: eg.
-   * https://github.mycorp.com/org/component/blob/master/README.md'
-   * */
-  sourceUrl: PropTypes.string,
+  /** {sourceUri} The absolute url to the Github source document. All
+   * relative urls will be assumed to be realitve to this file:
+   * e.g. https://github.mycorp.com/org/component/blob/master/README.md'
+   */
+  sourceUri: PropTypes.string,
   /** {resolver} The callback function executed for each found URL */
   resolver: PropTypes.func,
   /** {transformImageUri} The callback function executed for each found image */
   transformImageUri: PropTypes.func,
-  /** {renderers} the collection of resolvers to pass to `ReactMarkdown`  */
+  /** {renderers} the collection of resolvers to pass to `ReactMarkdown` */
   renderers: PropTypes.object,
-  /** {className} the css class to to pass to `ReactMarkdown`  */
+  /** {className} the css class to to pass to `ReactMarkdown` */
   className: PropTypes.string
 };
