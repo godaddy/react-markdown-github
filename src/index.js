@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import slugify from 'slugify';
 import URL from 'url-parse';
+import rip from 'rip-out';
 
 const isHash = /^#/;
 
@@ -175,12 +176,14 @@ export default class ReactMarkdownGithub extends Component {
       ...this.props.renderers
     };
 
+    const cleanedProps = rip(this.props, 'renderers');
+
     return (
       <ReactMarkdown
-        { ...this.props }
         renderers={ renderers }
         transformLinkUri={ this.transformLinkUri }
-        transformImageUri={ this.transformImageUri } />
+        transformImageUri={ this.transformImageUri } 
+        { ...cleanedProps } />
     );
   }
 }
