@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+- Create prop pass-through to provide props to `react-markdown`
+
 ### 2.0.0
 
 - [#2] **BREAKING** Handle hash URLs, provide both `{ filename, filepath }`.
