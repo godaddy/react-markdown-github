@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
-import slugify from 'slugify';
+import GithubSlugify from './gh-slugify';
 import URL from 'url-parse';
 
 const isHash = /^#/;
@@ -19,11 +19,11 @@ const isHash = /^#/;
 export default class ReactMarkdownGithub extends Component {
   constructor() {
     super(...arguments);
-
+    this.slugify = new GithubSlugify();
     this.transformLinkUri = this.transformLinkUri.bind(this);
     this.renderHeading = this.renderHeading.bind(this);
     this.transformImageUri = this.transformImageUri.bind(this);
-    this.slugs = {};
+
     this.state = {};
   }
 
@@ -145,15 +145,7 @@ export default class ReactMarkdownGithub extends Component {
       }
     });
 
-    const slug = slugify(title, { lower: true });
-    let uniqueSlug = slug;
-
-    this.slugs[slug] = this.slugs[slug] || 0;
-    if (this.slugs[slug]) {
-      uniqueSlug = `${slug}${this.slugs[slug]}`;
-    }
-
-    this.slugs[slug] += 1;
+    const uniqueSlug = this.slugify.slug(title);
 
     // eslint-disable-next-line react/no-children-prop
     return React.createElement(`h${props.level}`, {

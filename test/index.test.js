@@ -146,10 +146,10 @@ Repeat Header`;
       assume(tree.find('#header').find('a').prop('href')).is.equal('#header');
 
       // check duplicates
-      assume(tree.find('#header1')).to.have.length(1);
-      assume(tree.find('#header1').find('a').prop('href')).is.equal('#header1');
-      assume(tree.find('#header2')).to.have.length(1);
-      assume(tree.find('#header2').find('a').prop('href')).is.equal('#header2');
+      assume(tree.find('#header-1')).to.have.length(1);
+      assume(tree.find('#header-1').find('a').prop('href')).is.equal('#header-1');
+      assume(tree.find('#header-2')).to.have.length(1);
+      assume(tree.find('#header-2').find('a').prop('href')).is.equal('#header-2');
 
       assume(tree.find('#super-long-header')).to.have.length(1);
       assume(tree.find('#super-long-header').find('a').prop('href')).is.equal('#super-long-header');
