@@ -26,7 +26,7 @@ describe('GithubSlugify', function () {
         assume(slug.slug('something & something else')).equals("something--something-else");
         assume(slug.slug('unicode ♥ is ☢')).equals("unicode--is-");
         assume(slug.slug('greek ∆ does something')).equals("greek--does-something");
-        assume(slug.slug('copy © stuff ')).equals("copy-");        
+        assume(slug.slug('copy ©')).equals("copy-");        
     });
 
 
