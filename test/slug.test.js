@@ -22,7 +22,11 @@ describe('GithubSlugify', function () {
     it('non-text-chars', () => {
         const slug = new GithubSlugify();
         assume(slug.slug(' a `code block` in the header')).equals('a-code-block-in-the-header');
-        assume(slug.slug(' a question mark?')).equals('a- question-mark');
+        assume(slug.slug(' a question mark?')).equals('a-question-mark');
+        assume(slug.slug('something & something else')).equals("something--something-else");
+        assume(slug.slug('unicode ♥ is ☢')).equals("unicode--is-");
+        assume(slug.slug('greek ∆ delta')).equals("greek--does-something");
+        assume(slug.slug('copy © stuff ')).equals("copy-");        
     });
 
 
