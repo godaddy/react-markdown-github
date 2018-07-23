@@ -1,6 +1,7 @@
 # `react-markdown-github`
 
 - Create prop pass-through to provide props to `react-markdown`
+- Change `resolver` prop to `transformLinkUri` to be consistent with `react-markdown`
 
 ### 2.0.0
 
