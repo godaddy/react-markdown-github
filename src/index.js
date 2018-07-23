@@ -176,27 +176,32 @@ export default class ReactMarkdownGithub extends Component {
       ...this.props.renderers
     };
 
-    const cleanedProps = rip(this.props, 'renderers');
+    const cleanedProps = rip(this.props, 'renderers', 'resolver');
 
     return (
       <ReactMarkdown
         renderers={ renderers }
         transformLinkUri={ this.transformLinkUri }
-        transformImageUri={ this.transformImageUri } 
+        transformImageUri={ this.transformImageUri }
         { ...cleanedProps } />
     );
   }
 }
 
-ReactMarkdownGithub.defaultProps = {
-  ...ReactMarkdown.defaultProps
-};
-
 ReactMarkdownGithub.propTypes = {
+  /** {source} The Markdown content to be rendered by `ReactMarkdown` */
+  source: PropTypes.string,
   /** {sourceUri} The absolute url to the Github source document. All
-   * relative urls will be assumed to be realitve to this file:
-   * e.g. https://github.mycorp.com/org/component/blob/master/README.md'
-   */
+  * relative urls will be assumed to be realitve to this file:
+  * e.g. https://github.mycorp.com/org/component/blob/master/README.md'
+  */
   sourceUri: PropTypes.string,
-  ...ReactMarkdown.propTypes
+  /** {resolver} The callback function executed for each found URL */
+  resolver: PropTypes.func,
+  /** {transformImageUri} The callback function executed for each found image */
+  transformImageUri: PropTypes.func,
+  /** {renderers} the collection of resolvers to pass to `ReactMarkdown` */
+  renderers: PropTypes.object,
+  /** {className} the css class to to pass to `ReactMarkdown` */
+  className: PropTypes.string
 };
