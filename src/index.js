@@ -105,10 +105,10 @@ export default class ReactMarkdownGithub extends Component {
   * @api private
   */
   transformLinkUri(uri, children, title) {
-    const { resolver } = this.props;
+    const { transformLinkUri } = this.props;
     const normalized = this.normalizeLinkUri(uri);
     const opts = { ...this.state, uri: normalized, children, title };
-    return resolver && resolver(opts) || normalized;
+    return transformLinkUri && transformLinkUri(opts) || normalized;
   }
 
   /**
@@ -176,7 +176,12 @@ export default class ReactMarkdownGithub extends Component {
       ...this.props.renderers
     };
 
-    const cleanedProps = rip(this.props, 'renderers', 'resolver');
+    const cleanedProps = rip(
+      this.props,
+      'renderers',
+      'transformImageUri',
+      'transformLinkUri'
+    );
 
     return (
       <ReactMarkdown
@@ -196,8 +201,8 @@ ReactMarkdownGithub.propTypes = {
   * e.g. https://github.mycorp.com/org/component/blob/master/README.md'
   */
   sourceUri: PropTypes.string,
-  /** {resolver} The callback function executed for each found URL */
-  resolver: PropTypes.func,
+  /** {transformLinkUri} The callback function executed for each found URL */
+  transformLinkUri: PropTypes.func,
   /** {transformImageUri} The callback function executed for each found image */
   transformImageUri: PropTypes.func,
   /** {renderers} the collection of resolvers to pass to `ReactMarkdown` */

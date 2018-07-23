@@ -39,7 +39,7 @@ describe('ReactMarkdownGithub', function () {
       assume(tree.find('img')).to.have.length(1);
       assume(tree.find('img').prop('src')).is.equal('https://someplace/bar.png');
     });
-    it('proxy url rewrites realitive urls', () => {
+    it('proxy url rewrites relative urls', () => {
       const input = 'Some markdown  ![alt text](resources/bar.png "Logo Title Text 1")  with a random image in it.';
       const resolver = ({ uri, github, org, repo, filename }) => {
         assume(uri).to.exist();
@@ -181,7 +181,7 @@ Repeat Header`;
         source: input,
         className: 'neatClass',
         sourceUri: 'https://github.mycorp.com/org/component/blob/master/README.md',
-        resolver: ({ uri, github, org, repo, filename }) => {
+        transformLinkUri: ({ uri, github, org, repo, filename }) => {
           // Validate all resolver params
           assume(uri).to.exist();
           assume(github).equals('https://github.mycorp.com/');
