@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import slugify from 'slugify';
 import URL from 'url-parse';
-import rip from 'rip-out';
 
 const isHash = /^#/;
 
@@ -176,19 +175,13 @@ export default class ReactMarkdownGithub extends Component {
       ...this.props.renderers
     };
 
-    const cleanedProps = rip(
-      this.props,
-      'renderers',
-      'transformImageUri',
-      'transformLinkUri'
-    );
-
     return (
       <ReactMarkdown
+        { ...this.props }
         renderers={ renderers }
         transformLinkUri={ this.transformLinkUri }
         transformImageUri={ this.transformImageUri }
-        { ...cleanedProps } />
+      />
     );
   }
 }
@@ -197,9 +190,9 @@ ReactMarkdownGithub.propTypes = {
   /** {source} The Markdown content to be rendered by `ReactMarkdown` */
   source: PropTypes.string,
   /** {sourceUri} The absolute url to the Github source document. All
-  * relative urls will be assumed to be realitve to this file:
-  * e.g. https://github.mycorp.com/org/component/blob/master/README.md'
-  */
+   * relative urls will be assumed to be realitve to this file:
+   * e.g. https://github.mycorp.com/org/component/blob/master/README.md'
+   */
   sourceUri: PropTypes.string,
   /** {transformLinkUri} The callback function executed for each found URL */
   transformLinkUri: PropTypes.func,
