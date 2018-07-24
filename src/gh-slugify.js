@@ -1,7 +1,7 @@
 /**
  * This code is attempting to copy the Ruby pipeline filter GH uses to add unique ids to headings:
  * https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb
- * 
+ *
  */
 
 
@@ -15,11 +15,11 @@ export default class GithubSlugify {
     this.replacementChar = '-';
   }
 
-  replace (string) {
+  replace(string) {
     string = string.toLowerCase();
     return string.trim()
       .replace(replace, '')
-      .replace(whitespace, this.replacementChar)
+      .replace(whitespace, this.replacementChar);
   }
 
   slug(text) {
