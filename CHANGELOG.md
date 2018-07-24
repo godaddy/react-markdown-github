@@ -1,6 +1,6 @@
 # `react-markdown-github`
 
-[#4] improving headline ID/anchor rendering to be more GH compliant
+- [#4] improving headline ID/anchor rendering to be more GH compliant
 
 ### 2.0.0
 
