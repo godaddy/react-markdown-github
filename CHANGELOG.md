@@ -1,6 +1,9 @@
 # `react-markdown-github`
 
+
 - [#4] improving headline ID/anchor rendering to be more GH compliant
+- [#5] **BREAKING** Change `resolver` prop to `transformLinkUri` to be consistent with `react-markdown`
+- Create prop pass-through to provide props to `react-markdown`
 
 ### 2.0.0
 
@@ -19,3 +22,8 @@
 ### 1.0.0
 
 - Initial release
+
+[#1]: https://github.com/godaddy/react-markdown-github/pull/1
+[#2]: https://github.com/godaddy/react-markdown-github/pull/2
+[#3]: https://github.com/godaddy/react-markdown-github/pull/3
+[#5]: https://github.com/godaddy/react-markdown-github/pull/5
