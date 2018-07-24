@@ -19,6 +19,11 @@ describe('GithubSlugify', function () {
     assume(slug.slug('this is neat')).equals('this-is-neat-2');
   });
 
+  it('trim white space', () => {
+    const slug = new GithubSlugify();
+    assume(slug.slug('   lots of extra space   ')).equals('lots-of-extra-space');
+  });
+
   it('non-text-chars', () => {
     const slug = new GithubSlugify();
     assume(slug.slug(' a `code block` in the header')).equals('a-code-block-in-the-header');
@@ -29,14 +34,17 @@ describe('GithubSlugify', function () {
     assume(slug.slug('greek ∆ does something')).equals('greek--does-something');
     assume(slug.slug('copy ©')).equals('copy-');
     assume(slug.slug('Other punctuation, such as d.o.t.s, commas')).equals('other-punctuation-such-as-dots-commas');
+    assume(slug.slug(' random _ in my header  ')).equals('random-_-in-my-header');
     assume(slug.slug('Emdash –– and dash --')).equals('emdash--and-dash---');
     assume(slug.slug('Ampersand &')).equals('ampersand-');
     assume(slug.slug('Backslashes// or slashes\\')).equals('backslashes-or-slashes');
     assume(slug.slug('Complex code blocks like `/foo/bar/:bazz?buzz=foo`')).equals('complex-code-blocks-like-foobarbazzbuzzfoo');
-    assume(slug.slug(' Bold formatting **like this**')).equals('bold-formatting-like-this');
-    assume(slug.slug('Italic formatting _like this_')).equals('italic-formatting-like-this');
+   // In the order of operations Markdown formatting will be striped from the headline before generating the slug.
+   // assume(slug.slug(' Bold formatting **like this**')).equals('bold-formatting-like-this');
+   // assume(slug.slug('Italic formatting _like this_')).equals('italic-formatting-like-this');
     assume(slug.slug(' All !@# the $%^ colors &*( of ){} the |~ punctuation < "\' rainbow += '))
       .equals('all--the--colors--of--the--punctuation---rainbow-');
+    //We need full unicode support for these tests to match GH behavior. 
     // assume(slug.slug(' Seriously all of them ... Alt + [q-|] œ∑´®†¥¨ˆøπ“‘«')).equals('seriously-all-of-them--alt--q--œˆøπ');
     // assume(slug.slug('unicode ♥ is ☢')).equals('unicode--is-');
   });

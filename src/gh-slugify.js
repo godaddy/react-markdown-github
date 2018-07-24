@@ -5,7 +5,7 @@
  * This is an area for improvement via future contribution. 
  */
 
-const replace = /[^a-zA-Z0-9\- ]/g;
+const replace = /[^\w\- ]/g;
 const whitespace = /\s/g;
 
 /**
