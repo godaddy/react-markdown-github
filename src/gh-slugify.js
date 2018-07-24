@@ -1,29 +1,29 @@
 /**
  * This RegEx is attempting to copy the Ruby pipeline filter GH uses to add unique ids to headings:
  * https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb
- * The replace isn't perfect as it doesn't correctly handle unicode characters. 
- * This is an area for improvement via future contribution. 
+ * The replace isn't perfect as it doesn't correctly handle unicode characters.
+ * This is an area for improvement via future contribution.
  */
 
 const replace = /[^\w\- ]/g;
 const whitespace = /\s/g;
 
 /**
- * A utility class that is used to create 
+ * A utility class that is used to create
  * a normalized ID from a string of text:
- * 
+ *
  *   `This is my headline` becomes `this-is-my-headline`
- * 
+ *
  * This is a statefull object such that duplicate
- * occurances of the same normalized string will have 
+ * occurances of the same normalized string will have
  * sequence number apended to them.
- * 
+ *
  * Passing `This is my headline` a second time becomes `this-is-my-headline-1`
- * 
+ *
  * The normalization process is meant to mimic the headline
- * linking behavior GitHub provides when it renders markdown 
+ * linking behavior GitHub provides when it renders markdown
  * to html.
- * 
+ *
  * @class GithubSlugify
  * @api public
  */

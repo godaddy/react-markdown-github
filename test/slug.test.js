@@ -39,12 +39,12 @@ describe('GithubSlugify', function () {
     assume(slug.slug('Ampersand &')).equals('ampersand-');
     assume(slug.slug('Backslashes// or slashes\\')).equals('backslashes-or-slashes');
     assume(slug.slug('Complex code blocks like `/foo/bar/:bazz?buzz=foo`')).equals('complex-code-blocks-like-foobarbazzbuzzfoo');
-   // In the order of operations Markdown formatting will be striped from the headline before generating the slug.
-   // assume(slug.slug(' Bold formatting **like this**')).equals('bold-formatting-like-this');
-   // assume(slug.slug('Italic formatting _like this_')).equals('italic-formatting-like-this');
+    // In the order of operations Markdown formatting will be striped from the headline before generating the slug.
+    // assume(slug.slug(' Bold formatting **like this**')).equals('bold-formatting-like-this');
+    // assume(slug.slug('Italic formatting _like this_')).equals('italic-formatting-like-this');
     assume(slug.slug(' All !@# the $%^ colors &*( of ){} the |~ punctuation < "\' rainbow += '))
       .equals('all--the--colors--of--the--punctuation---rainbow-');
-    //We need full unicode support for these tests to match GH behavior. 
+    // We need full unicode support for these tests to match GH behavior.
     // assume(slug.slug(' Seriously all of them ... Alt + [q-|] œ∑´®†¥¨ˆøπ“‘«')).equals('seriously-all-of-them--alt--q--œˆøπ');
     // assume(slug.slug('unicode ♥ is ☢')).equals('unicode--is-');
   });
