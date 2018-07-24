@@ -18,7 +18,7 @@ npm install react-markdown-github
 <MarkdownGithub 
   source={ markdown } 
   sourceUri='https://github.mycorp.com/org/component/blob/master/README.md'  
-  resolver={ ({ uri, github, org, repo, filename, filepath }) => { } }
+  transformLinkUri={ ({ uri, github, org, repo, filename, filepath }) => { } }
   transformImageUri={ ({ uri, github, org, repo, filename }) => {} }
   renderers={ code: myCodeFormatter } 
   className='myClass' />
@@ -28,7 +28,7 @@ npm install react-markdown-github
 
 - `sourceUri` Absolute URL to orgional markdown. All relative links will be
   resolved relative to this URL.
-- `resolver` URL resolver function. To override the URL resolver and point a url
+- `transformLinkUri` URL resolver function. To override the URL resolver and point a url
   to an alternate location.
 - `transformImageUri` image URL resolver function. Default behavior is to not modify image urls.
 - `renderers` An object of render function values with keys corresponding to
