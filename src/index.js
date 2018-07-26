@@ -1,5 +1,5 @@
-import ReactMarkdownGithub from 'src/component.js';
-import GithubSlugify from 'src/gh-slugify.js';
+import ReactMarkdownGithub from './component.js';
+import GithubSlugify from './gh-slugify.js';
 
 export {
   ReactMarkdownGithub,
