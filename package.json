@@ -2,9 +2,9 @@
   "name": "react-markdown-github",
   "description": "React component that renders Markdown similarly to Github's formatting",
   "version": "2.0.0",
-  "main": "./index.js",
-  "browser": "./index.js",
-  "module": "./index.js",
+  "main": "./lib/index.js",
+  "browser": "./lib/index.js",
+  "module": "./src/index.js",
   "babel": {
     "plugins": [
       "transform-object-rest-spread"
