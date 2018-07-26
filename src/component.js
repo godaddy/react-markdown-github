@@ -139,7 +139,7 @@ export default class ReactMarkdownGithub extends Component {
 
     props.children.forEach((child) => {
       if (child.props && child.props.children) {
-        title += child.props.children + ' ';
+        title += child.props.children;
       } else {
         title += child;
       }
