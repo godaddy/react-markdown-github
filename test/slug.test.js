@@ -1,5 +1,5 @@
 import assume from 'assume';
-import { GithubSlugify } from '../src/';
+import { GithubSlugify } from '../src';
 
 describe('GithubSlugify', function () {
 
