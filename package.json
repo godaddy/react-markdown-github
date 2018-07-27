@@ -1,10 +1,10 @@
 {
   "name": "react-markdown-github",
   "description": "React component that renders Markdown similarly to Github's formatting",
-  "version": "2.0.0",
-  "main": "lib/index.js",
-  "browser": "lib/index.js",
-  "module": "src/index.js",
+  "version": "3.0.0",
+  "main": "./lib/index.js",
+  "browser": "./lib/index.js",
+  "module": "./src/index.js",
   "babel": {
     "plugins": [
       "transform-object-rest-spread"
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "eslint-godaddy-react src/*.js test/*.js",
-    "prepublishOnly": "mkdir -p lib && babel -o lib/index.js src/index.js",
+    "prepublishOnly": "mkdir -p lib && babel -d ./lib src/*.js",
     "pretest": "npm run lint",
     "test": "nyc --reporter=text --reporter=json-summary npm run test:mocha",
     "test:mocha": "mocha --require test/setup ./test/*.test.js"
@@ -60,7 +60,6 @@
   },
   "dependencies": {
     "react-markdown": "^3.3.0",
-    "slugify": "^1.2.9",
     "url-parse": "^1.4.0"
   }
 }

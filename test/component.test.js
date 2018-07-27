@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdownGithub from '../src';
+import { ReactMarkdownGithub } from '../src';
 import { mount } from 'enzyme';
 import assume from 'assume';
 import assumeEnzyme from 'assume-enzyme';
@@ -146,24 +146,45 @@ Repeat Header`;
       assume(tree.find('#header').find('a').prop('href')).is.equal('#header');
 
       // check duplicates
-      assume(tree.find('#header1')).to.have.length(1);
-      assume(tree.find('#header1').find('a').prop('href')).is.equal('#header1');
-      assume(tree.find('#header2')).to.have.length(1);
-      assume(tree.find('#header2').find('a').prop('href')).is.equal('#header2');
+      assume(tree.find('#header-1')).to.have.length(1);
+      assume(tree.find('#header-1').find('a').prop('href')).is.equal('#header-1');
+      assume(tree.find('#header-2')).to.have.length(1);
+      assume(tree.find('#header-2').find('a').prop('href')).is.equal('#header-2');
 
       assume(tree.find('#super-long-header')).to.have.length(1);
       assume(tree.find('#super-long-header').find('a').prop('href')).is.equal('#super-long-header');
       assume(tree.find('#blort')).to.have.length(0);
     });
 
-    it('A header with non text elements', () => {
-      const input = '### `codething` in the header `moreCode` txt';
+    it('A header with code elements', () => {
+      const input = '### a `codething` in the header `moreCode` txt';
 
       renderFullDom({ source: input });
 
-      assume(tree.find('#codething-in-the-header-morecode-txt')).to.have.length(1);
-      assume(tree.find('#codething-in-the-header-morecode-txt')
-        .find('a').prop('href')).is.equal('#codething-in-the-header-morecode-txt');
+      assume(tree.find('#a-codething-in-the-header-morecode-txt')).to.have.length(1);
+      assume(tree.find('#a-codething-in-the-header-morecode-txt')
+        .find('a').prop('href')).is.equal('#a-codething-in-the-header-morecode-txt');
+    });
+
+    it('A header with bold element', () => {
+      const input = '### bold in the **bold** header ';
+
+      renderFullDom({ source: input });
+
+      assume(tree.find('#bold-in-the-bold-header')).to.have.length(1);
+      assume(tree.find('#bold-in-the-bold-header')
+        .find('a').prop('href')).is.equal('#bold-in-the-bold-header');
+    });
+
+
+    it('A header with Italic element', () => {
+      const input = '### Italics in the header _Italics_';
+
+      renderFullDom({ source: input });
+
+      assume(tree.find('#italics-in-the-header-italics')).to.have.length(1);
+      assume(tree.find('#italics-in-the-header-italics')
+        .find('a').prop('href')).is.equal('#italics-in-the-header-italics');
     });
   });
 
