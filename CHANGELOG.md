@@ -28,3 +28,4 @@
 [#2]: https://github.com/godaddy/react-markdown-github/pull/2
 [#3]: https://github.com/godaddy/react-markdown-github/pull/3
 [#5]: https://github.com/godaddy/react-markdown-github/pull/5
+[#4]: https://github.com/godaddy/react-markdown-github/pull/4
