@@ -1,5 +1,6 @@
 # `react-markdown-github`
 
+### 3.0.0
 
 - [#4] improving headline ID/anchor rendering to be more GH compliant
 - [#5] **BREAKING** Change `resolver` prop to `transformLinkUri` to be consistent with `react-markdown`
