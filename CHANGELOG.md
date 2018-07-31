@@ -1,5 +1,8 @@
 # `react-markdown-github`
 
+- Add ReactMarkdownGithub component as a default export
+- Fixing babel output
+
 ### 3.0.0
 
 - [#4] improving headline ID/anchor rendering to be more GH compliant

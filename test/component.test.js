@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactMarkdownGithub } from '../src';
+import ReactMarkdownGithub from '../src';
 import { mount } from 'enzyme';
 import assume from 'assume';
 import assumeEnzyme from 'assume-enzyme';

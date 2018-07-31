@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "eslint-godaddy-react src/*.js test/*.js",
-    "prepublishOnly": "mkdir -p lib && babel -d ./lib src/*.js",
+    "prepublishOnly": "rm -rf lib && mkdir -p lib && babel -d lib src",
     "pretest": "npm run lint",
     "test": "nyc --reporter=text --reporter=json-summary npm run test:mocha",
     "test:mocha": "mocha --require test/setup ./test/*.test.js"
