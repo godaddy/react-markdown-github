@@ -61,7 +61,7 @@ export default class GithubSlugify {
       uniqueSlug = `${slug}-${this.slugs[slug]}`;
     }
     this.slugs[slug] += 1;
-    
+
     // Remove any trailing hyphens before returning
     return uniqueSlug.replace(/-$/g, '');
   }
