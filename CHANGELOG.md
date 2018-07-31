@@ -1,5 +1,8 @@
 # `react-markdown-github`
 
+- Remove trailing hyphens from slug
+- Add ReactMarkdownGithub component as a default export
+
 ### 3.0.0
 
 - [#4] improving headline ID/anchor rendering to be more GH compliant
