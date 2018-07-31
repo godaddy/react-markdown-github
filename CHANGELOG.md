@@ -1,7 +1,9 @@
 # `react-markdown-github`
 
-- Add ReactMarkdownGithub component as a default export
-- Fixing babel output
+### 3.0.1
+
+- [#8] Add ReactMarkdownGithub component as a default export
+- [#8] Fixing babel output
 
 ### 3.0.0
 
@@ -32,3 +34,4 @@
 [#3]: https://github.com/godaddy/react-markdown-github/pull/3
 [#5]: https://github.com/godaddy/react-markdown-github/pull/5
 [#4]: https://github.com/godaddy/react-markdown-github/pull/4
+[#8]: https://github.com/godaddy/react-markdown-github/pull/8
