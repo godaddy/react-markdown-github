@@ -166,7 +166,7 @@ export default class ReactMarkdownGithub extends Component {
       heading: this.renderHeading,
       ...this.props.renderers
     };
-    // this.slugify.reset();
+    this.slugify.reset();
     return (
       <ReactMarkdown
         { ...this.props }
