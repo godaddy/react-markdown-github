@@ -165,10 +165,12 @@ Repeat Header`;
       renderFullDom({ source: input });
       assume(tree.find('#header')).to.have.length(1);
       assume(tree.find('#header-1')).to.have.length(1);
+      assume(tree.find('#header-2')).to.have.length(0);
 
       tree.setProps(input);
-
       assume(tree.find('#header-2')).to.have.length(0);
+      assume(tree.find('#header-1')).to.have.length(1);
+      assume(tree.find('#header')).to.have.length(1);
     });
 
     it('A header with code elements', () => {
