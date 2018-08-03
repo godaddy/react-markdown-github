@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+- [#9] Reset slug counts before rendering to prevent inconsistent anchors
+
 ### 3.0.1
 
 - [#8] Add ReactMarkdownGithub component as a default export
@@ -35,3 +37,4 @@
 [#5]: https://github.com/godaddy/react-markdown-github/pull/5
 [#4]: https://github.com/godaddy/react-markdown-github/pull/4
 [#8]: https://github.com/godaddy/react-markdown-github/pull/8
+[#9]: https://github.com/godaddy/react-markdown-github/pull/9
