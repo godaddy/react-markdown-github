@@ -47,6 +47,28 @@ export default class GithubSlugify {
   }
 
   /**
+   * Helper function to extract text from a node.
+   * @api public
+   * @param {React.ReactElement} node - the react element to extract text from.
+   * @returns {String} the node text extracted from the node.
+   */
+  extractString(node) {
+    let title = '';
+    if (node.props && node.props.children) {
+      if (typeof node.props.children === 'object') {
+        node.props.children.forEach((child) => {
+          title += this.extractString(child);
+        });
+      } else {
+        title += node.props.children;
+      }
+    } else {
+      title += node;
+    }
+    return title;
+  }
+
+  /**
    * Generates a GH style slug from the passed text.
    * @api public
    * @param {String} text - the txt to be converted to a slug.
@@ -62,6 +84,20 @@ export default class GithubSlugify {
     }
     this.slugs[slug] += 1;
     return uniqueSlug;
+  }
+
+  /**
+   * Generates a GH style slug from the passed node.
+   * @api public
+   * @param {Array} nodes - the react elements to be used to create a slug.
+   * @returns {String} the node text converted to a slug.
+   */
+  slugNode(nodes) {
+    let title = '';
+    nodes.forEach((node) => {
+      title += this.extractString(node);
+    });
+    return this.slug(title);
   }
 
   /**

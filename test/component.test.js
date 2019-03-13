@@ -187,7 +187,6 @@ Repeat Header`;
       const input = '### bold in the **bold** header ';
 
       renderFullDom({ source: input });
-
       assume(tree.find('#bold-in-the-bold-header')).to.have.length(1);
       assume(tree.find('#bold-in-the-bold-header')
         .find('a').prop('href')).is.equal('#bold-in-the-bold-header');

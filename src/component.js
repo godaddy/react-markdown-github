@@ -135,17 +135,7 @@ export default class ReactMarkdownGithub extends Component {
   * @api private
   */
   renderHeading(props) {
-    let title = '';
-
-    props.children.forEach((child) => {
-      if (child.props && child.props.children) {
-        title += child.props.children;
-      } else {
-        title += child;
-      }
-    });
-
-    const uniqueSlug = this.slugify.slug(title);
+    const uniqueSlug = this.slugify.slugNode(props.children);
 
     // eslint-disable-next-line react/no-children-prop
     return React.createElement(`h${props.level}`, {
