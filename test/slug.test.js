@@ -28,7 +28,7 @@ describe('GithubSlugify', function () {
     const slug = new GithubSlugify();
     assume(slug.slug(' a `code block` in the header')).equals('a-code-block-in-the-header');
     assume(slug.slug(' `codething` in the header `moreCode` txt')).equals('codething-in-the-header-morecode-txt');
-    assume(slug.slug(' 1) numbers in the 345 header ')).equals('_1-numbers-in-the-345-header');
+    assume(slug.slug(' 1) numbers in the 345 header ')).equals('1-numbers-in-the-345-header');
     assume(slug.slug(' a question mark?')).equals('a-question-mark');
     assume(slug.slug('something & something else')).equals('something--something-else');
     assume(slug.slug('greek ∆ does something')).equals('greek--does-something');

@@ -75,12 +75,7 @@ export default class GithubSlugify {
    * @returns {String} the text converted to a slug.
    */
   slug(text) {
-    let slug = this.replace(text);
-
-    // Prepend slug with `_` when it begins with a number
-    if (!isNaN(slug.replace('#', '').charAt(0))) {
-      slug = '_' + slug.replace('#', '');
-    }
+    const slug = this.replace(text);
 
     let uniqueSlug = slug;
 
