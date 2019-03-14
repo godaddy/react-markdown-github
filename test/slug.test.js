@@ -1,3 +1,4 @@
+import React from 'react';
 import assume from 'assume';
 import { GithubSlugify } from '../src';
 
@@ -46,6 +47,12 @@ describe('GithubSlugify', function () {
     // We need full unicode support for these tests to match GH behavior.
     // assume(slug.slug(' Seriously all of them ... Alt + [q-|] œ∑´®†¥¨ˆøπ“‘«')).equals('seriously-all-of-them--alt--q--œˆøπ');
     // assume(slug.slug('unicode ♥ is ☢')).equals('unicode--is-');
+  });
+
+  it('nested children', () => {
+    const slug = new GithubSlugify();
+    const nodes = <div><div><div>this </div><div>is </div>a test </div>string</div>;
+    assume(slug.slugNode(nodes.props.children)).equals('this-is-a-test-string');
   });
 
 
