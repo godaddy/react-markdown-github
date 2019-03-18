@@ -76,15 +76,12 @@ export default class GithubSlugify {
    */
   slug(text) {
     const slug = this.replace(text);
-
     let uniqueSlug = slug;
-
     this.slugs[slug] = this.slugs[slug] || 0;
     if (this.slugs[slug]) {
       uniqueSlug = `${slug}-${this.slugs[slug]}`;
     }
     this.slugs[slug] += 1;
-
     return uniqueSlug;
   }
 
