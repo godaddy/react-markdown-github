@@ -1,5 +1,6 @@
 # `react-markdown-github`
 
+- [#10] Bump `react-markdown` to `^4.0.6`
 - [#9] Reset slug counts before rendering to prevent inconsistent anchors
 
 ### 3.0.1

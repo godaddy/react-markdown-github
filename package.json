@@ -17,7 +17,7 @@
   "scripts": {
     "lint": "eslint-godaddy-react src/*.js test/*.js",
     "prepublishOnly": "rimraf lib && mkdir -p lib && babel -d lib src",
-    "pretest": "npm run lint",
+    "posttest": "npm run lint",
     "test": "nyc --reporter=text --reporter=json-summary npm run test:mocha",
     "test:mocha": "mocha --require test/setup ./test/*.test.js"
   },
@@ -60,7 +60,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "react-markdown": "^3.3.0",
+    "react-markdown": "^4.0.6",
     "url-parse": "^1.4.0"
   }
 }
