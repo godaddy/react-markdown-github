@@ -10,12 +10,6 @@ describe('ReactMarkdownGithub', function () {
   let element;
   let tree;
 
-  afterEach(() => {
-    if (tree && typeof tree.unmount === 'function') {
-      tree.unmount();
-    }
-  });
-
   // Renders the ReactMarkdownGithub with the props supplied
   function renderFullDom(props) {
     element = React.createElement(ReactMarkdownGithub, props);
@@ -104,7 +98,6 @@ describe('ReactMarkdownGithub', function () {
       assume(result.filename).is.equal('README.md');
       assume(result.filepath).is.equal('/nested/dir/README.md');
     });
-
   });
 
   describe('renderers', function () {
