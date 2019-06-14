@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/godaddy/react-markdown-github.svg)](https://greenkeeper.io/)
+
 A React component that wraps [react-markdown] that:
 -  links all headers with an anchor link.
 -  resolves all relative links to absolute Github URLs based on the sourceUri of the document.
