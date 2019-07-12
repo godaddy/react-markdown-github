@@ -66,7 +66,7 @@ describe('ReactMarkdownGithub', function () {
 
   describe('.normalizeGithubUrl', () => {
     it('should handle URLs without hash', () => {
-      const uri = 'http://github.com/godaddy/react-markdown-github/blob/master/README.md';
+      const uri = 'http://github.com/godaddy/react-markdown-github/blob/some-wierd-branch/README.md';
       const result = ReactMarkdownGithub.normalizeGithubUrl(uri);
 
       assume(result).is.an('object');
@@ -75,6 +75,7 @@ describe('ReactMarkdownGithub', function () {
       assume(result.repo).is.equal('react-markdown-github');
       assume(result.filename).is.equal('README.md');
       assume(result.filepath).is.equal('/README.md');
+      assume(result.branch).is.equal('some-wierd-branch');
     });
 
     it('should handle URLs with hash', () => {
@@ -86,10 +87,11 @@ describe('ReactMarkdownGithub', function () {
       assume(result.org).is.equal('godaddy');
       assume(result.filename).is.equal('README.md');
       assume(result.filepath).is.equal('/README.md');
+      assume(result.branch).is.equal('master');
     });
 
     it('should provide distinct { filename, filepath }', () => {
-      const uri = 'http://github.com/godaddy/react-markdown-github/blob/master/nested/dir/README.md';
+      const uri = 'http://github.com/godaddy/react-markdown-github/blob/totally-not-master/nested/dir/README.md';
       const result = ReactMarkdownGithub.normalizeGithubUrl(uri);
 
       assume(result).is.an('object');
@@ -97,6 +99,7 @@ describe('ReactMarkdownGithub', function () {
       assume(result.org).is.equal('godaddy');
       assume(result.filename).is.equal('README.md');
       assume(result.filepath).is.equal('/nested/dir/README.md');
+      assume(result.branch).is.equal('totally-not-master');
     });
   });
 

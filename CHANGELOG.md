@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+- [#13] Allow `branch` to be extracted from a github url
+
 ### 3.2.0
 
 - [#10] Bump `react-markdown` to `^4.0.8`
@@ -19,7 +21,7 @@
 ### 2.0.0
 
 - [#2] **BREAKING** Handle hash URLs, provide both `{ filename, filepath }`.
-   - `filename` is now `filepath` in `resolver` 
+   - `filename` is now `filepath` in `resolver`
 - [#3] **BREAKING** Use `*Uri` and `uri` consistently to match the props
   exposed by `react-markdown`.
    - `sourceUrl` is now `sourceUri`.
@@ -41,3 +43,4 @@
 [#4]: https://github.com/godaddy/react-markdown-github/pull/4
 [#8]: https://github.com/godaddy/react-markdown-github/pull/8
 [#9]: https://github.com/godaddy/react-markdown-github/pull/9
+[#13]: https://github.com/godaddy/react-markdown-github/pull/13

@@ -39,13 +39,15 @@ export default class ReactMarkdownGithub extends Component {
     const [, org, repo] = parts;
     const filepath = `/${parts.slice(5).join('/')}`;
     const filename = parts[parts.length - 1];
+    const branch = parts[4];
 
     return {
       github: `${origin}/`,
       filepath,
       filename,
       org,
-      repo
+      repo,
+      branch
     };
   }
 
