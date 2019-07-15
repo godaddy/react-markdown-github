@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+### 3.3.0
+
 - [#13] Allow `branch` to be extracted from a github url
 
 ### 3.2.0
