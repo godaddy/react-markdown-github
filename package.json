@@ -15,8 +15,9 @@
     ]
   },
   "scripts": {
+    "build": "babel -d lib src",
     "lint": "eslint-godaddy-react src/*.js test/*.js",
-    "prepublishOnly": "rimraf lib && mkdir -p lib && babel -d lib src",
+    "prepublishOnly": "npm run build",
     "posttest": "npm run lint",
     "test": "nyc --reporter=text --reporter=json-summary npm run test:mocha",
     "test:mocha": "mocha --require test/setup ./test/*.test.js"
@@ -56,8 +57,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-test-renderer": "^16.3.2",
-    "rimraf": "^2.6.2"
+    "react-test-renderer": "^16.3.2"
   },
   "dependencies": {
     "react-markdown": "^4.0.8",

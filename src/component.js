@@ -30,23 +30,21 @@ export default class ReactMarkdownGithub extends Component {
   /**
    * Parses url into usable github components.
    * @param {String} uri - a valid Github url.
-   * @returns {Object} { github, org, repo, filename, filepath, query.ref }
+   * @returns {Object} { github, org, repo, filename, filepath, branch }
    * @api private
    */
   static normalizeGithubUrl(uri) {
-    const { origin, pathname, query = {}} = new URL(uri);
+    const { origin, pathname } = new URL(uri);
     const parts = pathname.split('/');
     const [, org, repo] = parts;
     const filepath = `/${parts.slice(5).join('/')}`;
     const filename = parts[parts.length - 1];
     const branch = parts[4];
-    const ref = query.ref || 'master';
 
     return {
       github: `${origin}/`,
       filepath,
       filename,
-      ref,
       org,
       repo,
       branch
