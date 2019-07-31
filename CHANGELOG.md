@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+- [#14] Remove runnable bits from files and document branch is returned.
+
 ### 3.3.0
 
 - [#13] Allow `branch` to be extracted from a github url
@@ -46,3 +48,4 @@
 [#8]: https://github.com/godaddy/react-markdown-github/pull/8
 [#9]: https://github.com/godaddy/react-markdown-github/pull/9
 [#13]: https://github.com/godaddy/react-markdown-github/pull/13
+[#14]: https://github.com/godaddy/react-markdown-github/pull/14
