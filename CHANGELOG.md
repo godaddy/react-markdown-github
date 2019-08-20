@@ -1,5 +1,7 @@
 # `react-markdown-github`
 
+### 3.3.1
+
 - [#14] Remove runnable bits from files and document branch is returned.
 
 ### 3.3.0
