@@ -30,7 +30,7 @@ export default class ReactMarkdownGithub extends Component {
   /**
    * Parses url into usable github components.
    * @param {String} uri - a valid Github url.
-   * @returns {Object} { github, org, repo, filename, filepath }
+   * @returns {Object} { github, org, repo, filename, filepath, branch }
    * @api private
    */
   static normalizeGithubUrl(uri) {
