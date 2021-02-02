@@ -26,7 +26,7 @@ npm install react-markdown-github
 
 ## Component Properties
 
-- `sourceUri` Absolute URL to orgional markdown. All relative links will be
+- `sourceUri` Absolute URL to original markdown. All relative links will be
   resolved relative to this URL.
 - `transformLinkUri` URL resolver function. To override the URL resolver and point a url
   to an alternate location.
