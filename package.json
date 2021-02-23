@@ -61,6 +61,6 @@
   },
   "dependencies": {
     "react-markdown": "^4.0.8",
-    "url-parse": "^1.4.0"
+    "url-parse": "^1.5.0"
   }
 }
