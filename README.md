@@ -1,3 +1,6 @@
+> [!WARNING]
+> **This library is deprecated, retired and no longer undevelopment.**
+
 # `react-markdown-github`
 
 A React component that wraps [react-markdown] that:
